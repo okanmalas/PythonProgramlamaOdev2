@@ -4,9 +4,8 @@ import os
 
 #region Classes
 class Book:
-    def __init__(self, name, page_count, author, is_available=True):
+    def __init__(self, name, author, is_available=True):
         self.name = name
-        self.page_count = page_count
         self.author = author
         self.is_available = is_available
     @staticmethod
@@ -14,24 +13,22 @@ class Book:
         pass
 
 class EBook(Book):
-    def __init__(self, name, page_count, author, size, is_available=True):
-        super().__init__(name, page_count, author, is_available)
+    def __init__(self, name, author, size, is_available=True):
+        super().__init__(name, author, is_available)
         self.size = size
     @staticmethod
     def add_book():
         print("Kitap ismi > ")
         name = input()
-        print("Sayfa sayısı > ")
-        page_count = input()
         print("Yazar > ")
         author = input()
         print("Boyut (Byte cinsinden) > ")
         size = input()
-        return EBook(name, int(page_count), author, int(size))
+        return EBook(name, author, int(size))
 
 class PhysicalBook(Book):
-    def __init__(self, name, page_count, author, inventory_count, is_available=True):
-        super().__init__(name, page_count, author, is_available)
+    def __init__(self, name, author, inventory_count, is_available=True):
+        super().__init__(name, author, is_available)
         self.inventory_count = inventory_count
     def deposit_book(self):
         self.inventory_count += 1
@@ -47,13 +44,11 @@ class PhysicalBook(Book):
     def add_book():
         print("Kitap ismi > ")
         name = input()
-        print("Sayfa sayısı > ")
-        page_count = input()
         print("Yazar > ")
         author = input()
         print("Adet > ")
         inventory_count = input()
-        return PhysicalBook(name, int(page_count), author, int(inventory_count))
+        return PhysicalBook(name, author, int(inventory_count))
 
 class User:
     def __init__(self, name, email, password):
@@ -117,6 +112,9 @@ class Library:
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
     #yapay zeka tarafından oluşturulan bir fonksiyon
+    #pycharm gibi bir ide üzerinden çalıştıracaksanız hata çıkmaması için
+    #os.system satırını yorum satırına alıp fonksiyonu pass geçirebilirsiniz
+    #terminal üzerinden sorunsuz çalışmaktadır
 def main_menu():
     clear_screen()
     print(f"{library.name} kütüphanesine hoşgeldiniz")
